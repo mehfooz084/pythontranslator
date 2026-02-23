@@ -4,7 +4,7 @@
 A simple language translator web app built using **Streamlit** and **deep-translator**.
 
 ## 🚀 Live Demo
-[Click here to use the app](https://easylang-translator-0812.streamlit.app/)
+[Click here to use the app](https://easylang-cloud.streamlit.app/)
 
 ---
 
@@ -30,5 +30,6 @@ cd easylang-translator
 
 pip install -r requirements.txt
 streamlit run easylang_app.py
+
 
 
