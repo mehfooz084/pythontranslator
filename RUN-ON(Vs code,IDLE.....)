@@ -1,0 +1,68 @@
+from tkinter import *
+from tkinter import ttk
+from deep_translator import GoogleTranslator
+
+# Function to translate text
+def change(text="type", src="english", dest="hindi"):
+    translated = GoogleTranslator(source=src.lower(), target=dest.lower()).translate(text)
+    return translated
+
+# Function to handle translation
+def data():
+    s = comb_sor.get()
+    d = comb_dest.get()
+    masg = Sor_txt.get(1.0, END)
+    textget = change(text=masg, src=s, dest=d)
+    dest_txt.delete(1.0, END)
+    dest_txt.insert(END, textget)
+
+# Initialize Tkinter window
+root = Tk()
+root.state("zoomed")  # Opens in maximized mode
+root.title("Translator")
+root.config(bg='lightblue')
+
+# Create a Frame to center everything
+main_frame = Frame(root, bg='lightblue')
+main_frame.pack(expand=True)
+
+# Title Label
+lab_txt = Label(main_frame, text="Translator", font=("Times New Roman", 40, "bold"), bg='lightblue')
+lab_txt.pack(pady=10)
+
+# Source Text Label
+lab_src = Label(main_frame, text="Source Text", font=("Times New Roman", 20, "bold"), fg="Black", bg='lightblue')
+lab_src.pack(pady=5)
+
+# Source Textbox
+Sor_txt = Text(main_frame, font=("Times New Roman", 20, "bold"), wrap=WORD, height=5, width=50)
+Sor_txt.pack(pady=5)
+
+# Language selection dropdowns
+lang_frame = Frame(main_frame, bg='lightblue')
+lang_frame.pack(pady=5)
+
+# List of language names (as required by deep-translator)
+list_text = list(GoogleTranslator().get_supported_languages(as_dict=True).keys())
+
+comb_sor = ttk.Combobox(lang_frame, value=list_text)
+comb_sor.pack(side=LEFT, padx=10)
+comb_sor.set("english")
+
+button_change = Button(lang_frame, text="Translate", relief=RAISED, command=data, bg="lightgray")
+button_change.pack(side=LEFT, padx=10)
+
+comb_dest = ttk.Combobox(lang_frame, value=list_text)
+comb_dest.pack(side=LEFT, padx=10)
+comb_dest.set("hindi")
+
+# Destination Text Label
+lab_dest = Label(main_frame, text="Dest Text", font=("Times New Roman", 20, "bold"), fg="Black", bg='lightblue')
+lab_dest.pack(pady=5)
+
+# Destination Textbox
+dest_txt = Text(main_frame, font=("Times New Roman", 20, "bold"), wrap=WORD, height=5, width=50)
+dest_txt.pack(pady=5)
+
+# Start Tkinter main loop
+root.mainloop()
